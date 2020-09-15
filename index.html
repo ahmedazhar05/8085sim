@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="font" type="font/ttf" href="grassetto.ttf">
+    <link rel="shortcut icon" href="./favico.ico" type="image/x-icon">
+    <link rel="icon" href="./favico.ico" type="image/x-icon">
+    <title>8085 Simulator</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="w8085" draggable="true" class="window" tabindex="1">
+        <span class="window-title">8085</span>
+        <div id="screen-container">
+          <div id="addrsc" class="screen"></div>
+          <div id="datasc" class="screen"></div>
+        </div>
+        <div id="keypad-container">
+          <div id="keyvals" class="keypad">
+            <div class="row">
+              <button class="key" title="12 [C]">C</button>
+              <button class="key" title="13 [D]">D</button>
+              <button class="key" title="14 [E]">E</button>
+              <button class="key" title="15 [F]">F</button>
+            </div>
+            <div class="row">
+              <button class="key" title="8 [8]">8</button>
+              <button class="key" title="9 [9]">9</button>
+              <button class="key" title="10 [A]">A</button>
+              <button class="key" title="11 [B]">B</button>
+            </div>
+            <div class="row">
+              <button class="key" title="4 [4]">4</button>
+              <button class="key" title="5 [5]">5</button>
+              <button class="key" title="6 [6]">6</button>
+              <button class="key" title="7 [7]">7</button>
+            </div>
+            <div class="row">
+              <button class="key" title="0 [0]">0</button>
+              <button class="key" title="1 [1]">1</button>
+              <button class="key" title="2 [2]">2</button>
+              <button class="key" title="3 [3]">3</button>
+            </div>
+          </div>
+          <div id="keyopts" class="keypad">
+            <div class="row">
+              <button class="key" value="res" title="Reset [Delete]">Reset</button>
+              <button class="key" value="bin" title="Kilobyte Increment [*]">Kbint</button>
+            </div>
+            <div class="row">
+              <button class="key" value="pre" title="Previous Address [&#8701;]">Prev</button>
+              <button class="key" value="exm" title="Examine Memory [+]">exm Mem</button>
+            </div>
+            <div class="row">
+              <button class="key" value="nxt" title="Next Address [&#8702;]">Next</button>
+              <button class="key" value="exr" title="Examine Register [-]">exm Reg</button>
+            </div>
+            <div class="row">
+              <button class="key" value="goo" title="Go [Space]">Go</button>
+              <button class="key" value="exe" title="Execute [Enter &crarr;]">Exec</button>
+            </div>
+          </div>
+        </div>
+        <div id="infobar">
+          <h3>REGISTERS:</h3>
+          <div id="infoline">
+            <span class="ilabel a-reg" title="Accumulator">A=</span><span class="ivalue a-reg" title="Accumulator"></span>
+            <span class="ilabel b-reg" title="Base">B=</span><span class="ivalue b-reg" title="Base"></span>
+            <span class="ilabel c-reg" title="Data">C=</span><span class="ivalue c-reg" title="Data"></span>
+            <span class="ilabel d-reg" title="Data">D=</span><span class="ivalue d-reg" title="Data"></span>
+            <span class="ilabel e-reg" title="Data">E=</span><span class="ivalue e-reg" title="Data"></span>
+            <span class="ilabel h-reg" title="Higher Order Address">H=</span><span class="ivalue h-reg" title="Higher Order Address"></span>
+            <span class="ilabel l-reg" title="Lower Order Address">L=</span><span class="ivalue l-reg" title="Lower Order Address"></span>
+            <span class="ilabel pc-reg" title="Program Counter">PC=</span><span class="ivalue pc-reg" title="Program Counter"></span>
+            <span class="ilabel sp-reg" title="Stack Pointer">SP=</span><span class="ivalue sp-reg" title="Stack Pointer"></span>
+            <span class="ilabel m-reg" title="Memory">M=</span><span class="ivalue m-reg" title="Memory"></span>
+            <span class="ilabel ie-reg" title="Interrupt Enable">IE=</span><span class="ivalue ie-reg" title="Interrupt Enable"></span>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <th title="Sign Flag">S</th>
+                <th title="Zero Flag">Z</th>
+                <th>&nbsp;</th>
+                <th title="Auxiliary Carry Bit">AC</th>
+                <th>&nbsp;</th>
+                <th title="Parity Bit">P</th>
+                <th>&nbsp;</th>
+                <th title="Carry Bit">CY</th>
+              </tr>
+              <tr>
+                <td class="s-flag">0</td>
+                <td class="z-flag">0</td>
+                <td class="u1-flag">0</td>
+                <td class="ac-flag">0</td>
+                <td class="u2-flag">0</td>
+                <td class="p-flag">0</td>
+                <td class="u3-flag">0</td>
+                <td class="cy-flag">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="debugform" draggable="true" class="window" tabindex="2">
+        <span class="window-title">Instructions</span>
+        <div id="details-row">
+          <select id="row-selector">
+          </select>
+          <span class="row-num">ROW NUMBER</span>
+          <button id="show-row">Show ROW</button>
+        </div><!--details-row  END--->
+        <div id="debug" class="table-container">
+          <table>
+            <tr>
+              <th title="addr">ADDRESS</th>
+              <th title="opcode">OPCODE</th>
+              <th title="inst">INSTRUCTIONS</th>
+              <th title="bytes">BYTES</th>
+            </tr>
+          </table>
+        </div>
+        <div id="stack-header">STACK (LIFO)</div>
+        <div id="stack" class="table-container">
+          <table>
+            <tr>
+              <th title="addr" style="text-align:center;">ADDRESS</th>
+              <th title="data" style="text-align:center;">DATA</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div id="row-data-container" class="window" tabindex="3">
+        <span class="window-title">Display Settings...</span>
+        <div class="row">
+          <label for="debugrows">Choose total number of rows for the display form (Default is 100 rows)</label>
+          <input id="debugrows" type="number" min="0" max="500" step="5" value="100">
+        </div>
+        <div class="row">
+          <label for="stackrows">Choose the total number of rows for the STACK display form (default is 25 rows)</label>
+          <input id="stackrows" type="number" min="0" max="100" step="5" value="25">
+        </div>
+        <div id="buttons-container">
+          <button>APPLY</button><button>DEFAULT</button><button>DONE</button>
+        </div>
+      </div>
+      <div id="oplist" class="window" tabindex="4">
+        <span class="window-title">Opcode List</span>
+        <span class="minimizer" title="minimize">▂▂</span>
+        <input type="text" id="searchbar" placeholder="Search">
+        <span id="loading-icon"></span>
+        <hr>
+        <div>
+          <ul></ul>
+        </div>
+      </div>
+      <div id="minitabs">
+        <div data-window="oplist">Opcode List</div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

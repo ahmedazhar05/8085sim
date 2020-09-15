@@ -1,0 +1,395 @@
+/*@import url('https://www.fontify.me/wf/ae25b74721ad09fc4f8ace6d425253e8');*/
+@font-face {
+    font-family: "TimesBold";
+    src: url(./grassetto.ttf) format("truetype");
+}
+html, body {
+  /*--min : 0px;*/
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+  background: slategray;
+  touch-action: manipulation;
+  z-index: 1;
+}
+div#container{
+  display: contents;
+  top: 0;
+  width:100%;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  width: fit-content;
+  overflow-y: hidden;
+  z-index: 2;
+}
+.window{
+  position: absolute;
+  border: 7px solid #aec7e1;
+  border-radius: 10px;
+  border-top-width: 35px;
+}
+div#w8085, div#debugform{
+  width: 100%;
+  padding: 10px;
+  max-width:438px;
+  overflow: visible;
+}
+div#w8085 {
+  background-color: lightgray;
+  left: 0%;
+}
+div#debugform {
+  background-color: ghostwhite;
+  left: 50%;
+}
+div#screen-container, div#keypad-container{
+  display: flex;
+  margin: 5px;
+}
+div#addrsc{width: 65%}
+div#datasc{width: 35%}
+div.screen{
+  background-color: rgb(209,18,0);
+  border-inline-start: 2px solid gray;
+  border-inline-end: 2px solid gray;
+  width: 100%;
+  margin: 0 5px;
+  font-family: TimesBold;
+  font-size: 75px;
+  color: rgba(255, 25, 0);
+  padding: 0 10px;
+}
+div.row{
+  display: flex;
+  flex-wrap: nowrap;
+  height: calc(100% / 4);
+}
+button.key{
+  width: 100%;
+  /*height: 50px;*/
+  padding: 0px;
+  margin: 2px;
+  font-family: TimesBold;
+  user-select: none;
+  border: 2px buttonface outset;
+  background-image: none;
+}
+button.key:active{
+  /*background-color: buttonface;
+  border: 2px buttonface inset;*/
+  border-style: inset;
+  background-image: linear-gradient(180deg, lightgray, transparent);
+}
+button.key:focus{outline: none}
+div.keypad{
+  padding : 20px;
+  border: solid 1px gray;
+  margin: 0 5px;
+  background-color: ghostwhite;
+}
+div#keyvals button.key{font-size: 1.7em}
+div#keyopts button.key{font-size: 0.9em}
+div#keyopts{width:35%}
+div#keyvals{width:65%}
+div#infobar{
+  padding: 10px;
+  border: 1px solid gray;
+  background: ghostwhite;
+  margin: 0 10px;
+}
+h3{
+  margin-block-start: 5px;
+  margin-block-end: 10px;
+}
+div#infoline{
+  margin-block-end: 10px;
+  font-size: 1.2em;
+}
+table, td, th{
+  font-size: 1.1em;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-collapse: separate;
+  border-spacing: 0;
+  cursor: default;
+  user-select: none;
+  -webkit-user-modify: read-only;
+}
+table{border: none}
+#infobar td, #infobar th{
+  width: 40px;
+  height: 30px;
+  text-align: center;
+}
+tr:first-child {
+  position: sticky;
+  top: 0px;
+}
+th {
+  background-color: lightgray;
+  position: sticky;
+  top: 0px;
+  border-top: 1px solid black;
+}
+td:focus, td:active {
+  outline: black dotted 1px;
+  outline-offset: 1px;
+}
+td {
+  background-color: white;
+  border-color: gray gray;
+  /*-webkit-user-modify: read-write-plaintext-only;*/
+  text-shadow: inherit;
+  color: transparent;
+}
+tr{text-shadow: 0 0 0 black}
+div#debugform div#details-row{
+  display: inline-block;
+  width: inherit;
+}
+select#row-selector{
+  padding-right: 40px;
+  height: 25px;
+  background-color: white;
+}
+span.row-num{
+  font-size: 1.1em;
+  padding: 5px;
+}
+button#show-row{
+  padding: 5px 40px;
+  float:right;
+  margin-bottom: 10px;
+}
+
+#debugform .table-container{
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1em;
+  width: fit-content;
+  overflow: auto;
+  padding: 0 2px;
+}
+#debugform #debug{max-height: 300px}
+#debugform #stack{max-height: 150px}
+#debugform .table-container td{height: 15px}
+td:last-child{border-right: 1px solid gray}
+th:last-child{border-right: 1px solid black}
+#debugform .table-container th{
+  height: 18px;
+  font-weight: normal;
+  text-align: left;
+  padding: 0 5px;
+}
+#stack-header{
+  font-size: 1.1em;
+  line-height: 1.1em;
+  margin: 3px 2px;
+  padding: 7px 0;
+  text-align: center;
+  border: 1px solid gray;
+}
+#debug th[title="addr"]{width: 90px}
+#debug th[title="opcode"]{width: 80px}
+#debug th[title="inst"]{width: 140px}
+#debug th[title="bytes"]{width: 70px}
+#stack th{width: 201px}
+#stack tr{text-align: center}
+
+div#row-data-container{
+  width: 300px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: ghostwhite;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: center;
+  display: none;
+  z-index: 5;
+}
+div#row-data-container label{
+  position: relative;
+  float: left;
+  width: 150px;
+}
+div#row-data-container input{
+  position: relative;
+  float: right;
+  width: 100px;
+}
+div#row-data-container > div.row{
+  display: inline-block;
+  width: -webkit-fill-available;
+  margin: 10px;
+  font-size: 0.9em;
+  line-height: 1em;
+}
+div#buttons-container{
+  display: flex;
+  justify-content:space-around;
+}
+div#buttons-container button{
+  padding: 5px 10px;
+  width: calc(100%/3 - 10px);
+}
+span.window-title{
+  font-family: Helvetica;
+  font-size: 0.95em;
+  position: absolute;
+  top: -25px;
+  left: 5px;
+  pointer-events: none;
+}
+span.minimizer{
+  color: white;
+  border: 1px outset transparent;
+  border-top: 0px;
+  position: absolute;
+  right: 5px;
+  padding: 10px 7px 5px 7px;
+  border-radius: 0 0 5px 5px;
+  top: -35px;
+  user-select: none;
+  /*content : '×'; //close icon */
+}
+/*span.minimizer:before{content: '▂▂'}*/
+span.minimizer:hover{border-color: lightgray}
+span.minimizer:active{border-style: inset}
+
+div#oplist{
+  height: 50%;
+  background: ghostwhite;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+}
+div#oplist input{
+  width: -webkit-fill-available;
+  padding: 5px;
+  font-size: 1em;
+  display: block;
+}
+div#oplist li, div#oplist ul{
+  list-style-type: none;
+}
+div#oplist li{
+  padding: 5px;
+  background: white;
+  border-bottom: 1px solid slategray;
+  user-select: none;
+  font-size: 1.1em;
+}
+div#oplist li:active{background: lightgray}
+div#oplist li.op-item:hover > span.info{
+  display: block;
+}
+div#oplist li.op-item > span.info{
+  display: none;
+  height: 1.1em;
+  width: 1.1em;
+  text-align: center;
+  border-radius: 1.5em;
+  font-size: 0.8em;
+  position: relative;
+  line-height: 1.3em;
+  border: 1px solid gray;
+  float: right;
+  color: gray;
+  cursor: pointer;
+  outline: none;
+  user-select: auto;
+  pointer-events: auto;
+}
+div#oplist li.op-item > span.info:focus{
+  color: black;
+  border-color: black;
+}
+span.info:focus::before {
+  content: attr(data-desc);
+  position: fixed;
+  max-width: 269px;
+  top: calc(var(--top) + 1em);
+  left: var(--left);
+  max-width: 269px;
+  background: white;
+  padding: 5px;
+  font-size: 1.1em;
+  color: black;
+  border: 1px solid black;
+  text-shadow: 1px 1px lightgrey;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  cursor: default;
+}
+div#oplist ul{
+  padding-inline-start: 0px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  border: 1px solid slategray;
+  border-bottom: 0px;
+}
+div#oplist div{
+  overflow: auto;
+  margin: 0;
+}
+hr{
+  width: 80%;
+  border: 1px solid lightgray;
+}
+div#oplist li span.code{
+  width: 30px;
+  display: inline-block;
+  color: red;
+}
+.window:focus{
+  border-color: #78a9dc;
+  outline: none;
+}
+div#oplist li.op-item span{pointer-events: none}
+div#oplist span#loading-icon{
+  position: absolute;
+  font-size: 2em;
+  width: auto;
+  right: 25px;
+  color: green;
+  padding-right: 5px;
+  line-height: 1em;
+  display: none;
+}
+span#loading-icon:before{
+  font-family: Verdana;
+  content: '';
+  animation: shift 0.2s infinite;
+  white-space: pre-wrap;
+}
+@keyframes shift {
+  0% {content: '.  ';}
+  20% {content: '.. ';}
+  40% {content: '...';}
+  60% {content: ' ..';}
+  80% {content: '  .';}
+  100% {content: '.  ';}
+}
+div#minitabs{
+  bottom: 0px;
+  width: 100%;
+  height: 35px;
+  position: fixed;
+  z-index: 10;
+  padding-left: 50px
+}
+div#minitabs > div{
+  display: inline-block;
+  background: lightblue;
+  width: 200px;
+  border-radius: 10px 10px 0 0;
+  font-family: Helvetica;
+  font-size: 0.95em;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #aec7e1;
+  cursor: default;
+}

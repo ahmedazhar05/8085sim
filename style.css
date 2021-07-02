@@ -1,7 +1,7 @@
 /*@import url('https://www.fontify.me/wf/ae25b74721ad09fc4f8ace6d425253e8');*/
 @font-face {
     font-family: "TimesBold";
-    src: url(./grassetto.ttf) format("truetype");
+    src: url(./assets/grassetto.ttf) format("truetype");
 }
 html, body {
   /*--min : 0px;*/

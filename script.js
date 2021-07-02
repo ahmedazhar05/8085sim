@@ -1018,7 +1018,7 @@ function init() {
 
   // fetching opcode JSON data from `opcodes.json` file
   searchList = {};
-  fetch('./opcodes.json')
+  fetch('./assets/opcodes.json')
     .then(response => response.json())
     .then(data => {
       opcodes = data;

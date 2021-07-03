@@ -1,3 +1,4 @@
+![Banner](./assets/banner.png)
 # 8085 Simulator
 This is an Intel 8085 Microprocessor Simulator in window like UI with Opcode-Instruction functions written solely in JavaScript.
 
